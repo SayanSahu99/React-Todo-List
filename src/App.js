@@ -3,7 +3,7 @@ import TodoInput from './components/TodoInput';
 import TodoList from './components/TodoList';
 import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import 'font-awesome/css/font-awesome.min.css'
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
 
     this.state = {
       items: [],
-      id: uuid(),
+      id: uuidv4(),
       item: '',
       editItem: false
     };
@@ -30,15 +30,17 @@ class App extends Component {
 
     const newItem = {
       id: this.state.id,
-      item: this.state.item
+      title: this.state.item
     };
+
+    console.log(newItem);
 
     const updatedItems = [...this.state.items, newItem];
 
     this.setState({
       items: updatedItems,
       item: '',
-      id: uuid(),
+      id: uuidv4(),
       editItem: false
     });
   }
@@ -51,7 +53,7 @@ class App extends Component {
             <Header />
             <h3 className="text-capitalize text-center">enter tasks</h3>
             <TodoInput item={this.state.item} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-            <TodoList />
+            <TodoList items={this.state.items} />
         </div>
       </div>
       </div>
