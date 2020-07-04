@@ -3,7 +3,7 @@ import { Input, Form, Card, CardBody, InputGroup, Button } from 'reactstrap'
 
 export default class TodoInput extends Component {
     render() {
-        const {item, handleChange, handleSubmit} = this.props;
+        const {item, handleChange, handleSubmit, editItem} = this.props;
         return (
             <Card>
                 <CardBody>
@@ -17,7 +17,7 @@ export default class TodoInput extends Component {
                                     value={item}
                                     onChange={handleChange}
                                     />
-                            <Button type="submit" className="btn mt-3 btn-block text-capitalize">add task</Button>
+                            <Button type="submit" className="btn mt-3 btn-block text-capitalize">{editItem ? 'edit task': 'add task'}</Button>
                         </InputGroup>
 
                     </Form>

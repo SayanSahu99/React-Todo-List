@@ -64,7 +64,9 @@ class App extends Component {
     
     this.setState({
       items: filteredItems,
-      item: selectedItem.title
+      item: selectedItem.title,
+      editItem: true,
+      id: id
     });
   }
 
@@ -77,7 +79,8 @@ class App extends Component {
             <h3 className="text-capitalize text-center">enter tasks</h3>
             <TodoInput item={this.state.item} 
                        handleChange={this.handleChange} 
-                       handleSubmit={this.handleSubmit} />
+                       handleSubmit={this.handleSubmit}
+                       editItem={this.state.editItem} />
 
             <TodoList items={this.state.items} 
                       clearList={this.clearList} 
