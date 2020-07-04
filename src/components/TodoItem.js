@@ -4,7 +4,13 @@ export default class TodoItem extends Component {
     render() {
         return (
             <div>
-                Todo Item 1
+                <li className="list-group-item text-capitalize my-2 d-flex justify-content-between">
+                    <h6>Title</h6>
+                    <div className="todo-icon">
+                        <span className="mx-2 text-success"><i className="fa fa-pencil"></i></span>
+                        <span className="mx-2 text-danger"><i className="fa fa-trash"></i></span>
+                    </div>
+                </li>
             </div>
         )
     }

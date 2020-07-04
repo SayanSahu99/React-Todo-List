@@ -9,10 +9,15 @@ import 'font-awesome/css/font-awesome.min.css'
 class App extends Component {
   render() {
     return (
-      <div>
-        <Header />
-        <TodoInput />
-        <TodoList />
+      <div className="container">
+      <div className="row">
+        <div className="col-10 col-md-8 mx-auto mt-4">
+            <Header />
+            <h3 className="text-capitalize text-center">enter tasks</h3>
+            <TodoInput />
+            <TodoList />
+        </div>
+      </div>
       </div>
     )
   }
