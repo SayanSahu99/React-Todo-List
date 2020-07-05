@@ -15,7 +15,8 @@ class App extends Component {
       items: [],
       id: uuidv4(),
       item: '',
-      editItem: false
+      editItem: false,
+      striked: [],
     };
   }
 
@@ -39,7 +40,7 @@ class App extends Component {
       items: updatedItems,
       item: '',
       id: uuidv4(),
-      editItem: false
+      editItem: false,
     });
   }
 
@@ -60,8 +61,7 @@ class App extends Component {
   handleEdit = id => {
     const filteredItems = this.state.items.filter(item => item.id !== id);
     const selectedItem = this.state.items.find(item => item.id === id);
-    console.log(selectedItem);
-    
+
     this.setState({
       items: filteredItems,
       item: selectedItem.title,
@@ -70,24 +70,50 @@ class App extends Component {
     });
   }
 
+  handleDone = (id) => {
+    const striked = [...this.state.striked];
+    
+    if(striked.includes(id)) {
+      let newStriked = [...striked]
+      const index = newStriked.indexOf(id);
+      if (index > -1) {
+        newStriked.splice(index, 1);
+      }
+      console.log("Disable: " + newStriked)
+      this.setState({
+        striked: newStriked
+      });  
+    }
+    else if (!striked.includes(id)){
+      let newStriked = [...striked, id]
+      console.log("enable: " + newStriked)
+      this.setState({
+        striked: newStriked
+      }); 
+    }
+     
+  }
+
   render() {
     return (
       <div className="container">
-      <div className="row">
-        <div className="col-10 col-md-8 mx-auto mt-4">
-            <Header />
-            <h3 className="text-capitalize text-center">enter tasks</h3>
-            <TodoInput item={this.state.item} 
-                       handleChange={this.handleChange} 
-                       handleSubmit={this.handleSubmit}
-                       editItem={this.state.editItem} />
+        <div className="row">
+          <div className="col-10 col-md-8 mx-auto mt-4">
+              <Header />
+              <h3 className="text-capitalize text-center">enter tasks</h3>
+              <TodoInput item={this.state.item} 
+                        handleChange={this.handleChange} 
+                        handleSubmit={this.handleSubmit}
+                        editItem={this.state.editItem} />
 
-            <TodoList items={this.state.items} 
-                      clearList={this.clearList} 
-                      handleDelete={this.handleDelete} 
-                      handleEdit={this.handleEdit} />
+              <TodoList items={this.state.items} 
+                        clearList={this.clearList} 
+                        handleDelete={this.handleDelete} 
+                        handleEdit={this.handleEdit}
+                        handleDone={this.handleDone}
+                        striked={this.state.striked} />
+          </div>
         </div>
-      </div>
       </div>
     )
   }

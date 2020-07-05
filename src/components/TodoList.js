@@ -4,7 +4,7 @@ import { Button, Card, CardBody } from 'reactstrap';
 
 export default class TodoList extends Component {
     render() {
-        const { items, clearList, handleDelete, handleEdit } = this.props;
+        const { items, clearList, handleDelete, handleEdit, handleDone, striked } = this.props;
         return (
             <Card className="my-5">
                 
@@ -15,9 +15,12 @@ export default class TodoList extends Component {
                             items.map(item => {
                                 return <div>{item.title && <TodoItem 
                                             key={item.id} 
+                                            actualId = {item.id}
                                             title={item.title} 
                                             handleDelete={() => handleDelete(item.id)}
-                                            handleEdit={() => handleEdit(item.id)} /> }
+                                            handleEdit={() => handleEdit(item.id)}
+                                            handleDone={() => handleDone(item.id)}
+                                            striked={striked}  /> }
                                         </div>                                
                             })
                         }
