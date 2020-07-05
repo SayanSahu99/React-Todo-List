@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { v4 as uuidv4 } from 'uuid';
 import 'font-awesome/css/font-awesome.min.css'
 import TaskCompleted from './components/TaskCompleted';
+import './App.css'
 
 class App extends Component {
 
@@ -114,7 +115,6 @@ class App extends Component {
         <div className="row">
           <div className="col-10 col-md-8 mx-auto mt-4">
               <Header />
-              <h3 className="text-capitalize text-center">enter tasks</h3>
               <TodoInput item={this.state.item} 
                         handleChange={this.handleChange} 
                         handleSubmit={this.handleSubmit}

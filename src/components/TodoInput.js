@@ -7,6 +7,7 @@ export default class TodoInput extends Component {
         return (
             <Card className="my-3">
                 <CardBody>
+                    <h3 className="text-capitalize text-center">enter tasks</h3>
                     <Form onSubmit={handleSubmit}>
                         <InputGroup>
                             <div className="input-group-prepend">
