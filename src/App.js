@@ -31,6 +31,14 @@ class App extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    if(this.state.item.replace(/^\s+|\s+$/g, '') === ''){
+      this.setState({
+        item: '',
+        editItem: false
+      });
+      return;
+    }
+
     const newItem = {
       id: this.state.id,
       title: this.state.item
