@@ -47,16 +47,31 @@ class App extends Component {
 
   clearList = () =>{
     this.setState({
-      items: []
+      items: [],
+      striked: []
     });
   }
 
   handleDelete = (id) => {
     const filteredItems = this.state.items.filter(item => item.id !== id);
+    const striked = [...this.state.striked];
+    if(striked.includes(id)) {
+      const index = striked.indexOf(id);      
+      if(index > -1){
+        striked.splice(index, 1);
+      }
 
-    this.setState({
-      items: filteredItems
-    });
+      this.setState({
+        items: filteredItems,
+        striked: striked
+      });
+    }
+    else{
+      this.setState({
+        items: filteredItems,
+        striked: striked
+      });
+    }
   }
 
   handleEdit = id => {

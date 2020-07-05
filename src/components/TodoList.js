@@ -13,7 +13,7 @@ export default class TodoList extends Component {
                         <h3 className="text-capitalize text-center">your tasks</h3>
                         {
                             items.map(item => {
-                                return <div>{item.title && <TodoItem 
+                                return <div key={item.id}>{item.title && <TodoItem 
                                             key={item.id} 
                                             actualId = {item.id}
                                             title={item.title} 
