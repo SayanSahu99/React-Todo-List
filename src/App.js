@@ -5,6 +5,7 @@ import Header from './components/Header';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { v4 as uuidv4 } from 'uuid';
 import 'font-awesome/css/font-awesome.min.css'
+import TaskCompleted from './components/TaskCompleted';
 
 class App extends Component {
 
@@ -79,14 +80,12 @@ class App extends Component {
       if (index > -1) {
         newStriked.splice(index, 1);
       }
-      console.log("Disable: " + newStriked)
       this.setState({
         striked: newStriked
       });  
     }
     else if (!striked.includes(id)){
       let newStriked = [...striked, id]
-      console.log("enable: " + newStriked)
       this.setState({
         striked: newStriked
       }); 
@@ -105,6 +104,9 @@ class App extends Component {
                         handleChange={this.handleChange} 
                         handleSubmit={this.handleSubmit}
                         editItem={this.state.editItem} />
+              
+              <TaskCompleted items={this.state.items}
+                             striked={this.state.striked}/>
 
               <TodoList items={this.state.items} 
                         clearList={this.clearList} 

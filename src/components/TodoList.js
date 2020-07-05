@@ -6,7 +6,7 @@ export default class TodoList extends Component {
     render() {
         const { items, clearList, handleDelete, handleEdit, handleDone, striked } = this.props;
         return (
-            <Card className="my-5">
+            <Card className="my-4">
                 
                     <ul className="list-group">
                     <CardBody>
