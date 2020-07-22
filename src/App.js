@@ -8,6 +8,8 @@ import 'font-awesome/css/font-awesome.min.css'
 import TaskCompleted from './components/TaskCompleted';
 import './App.css'
 
+require('dotenv').config()
+
 class App extends Component {
 
   constructor(props) {
