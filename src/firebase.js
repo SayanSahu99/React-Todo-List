@@ -1,20 +1,22 @@
 
-import firebase from "firebase";
+const firebase = require("firebase");
+// Required for side-effects
+require("firebase/firestore");
 
-var firebaseApp = {
-    apiKey: process.env.apiKey,
-    authDomain: process.env.authDomain,
-    databaseURL: process.env.databaseURL,
-    projectId: process.env.projectId,
-    storageBucket: process.env.storageBucket,
-    messagingSenderId: process.env.messagingSenderId,
-    appId: process.env.appId,
-    measurementId: process.env.measurementId
-  };
-  
-  // Initialize Firebase
-  firebase.initializeApp(firebaseApp);
+require('dotenv').config()
 
-  const db = firebaseApp.firestore();
+firebase.initializeApp({
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSEAGING_SENDER_ID,
+    appId: process.env.REACT_APP_APP_ID,
+    measurementId: process.env.REACT_APP_MEARSUREMENT_ID
+  });
+//   console.log(typeof(process.env.projectId))
+  console.log(process.env);
+  const db = firebase.firestore();
 
   export default db;

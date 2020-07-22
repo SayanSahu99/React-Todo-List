@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { v4 as uuidv4 } from 'uuid';
 import 'font-awesome/css/font-awesome.min.css'
 import TaskCompleted from './components/TaskCompleted';
+import db from './firebase'
 import './App.css'
 
 require('dotenv').config()
@@ -23,6 +24,14 @@ class App extends Component {
       striked: [],
     };
   }
+
+  componentDidMount() {
+    db.collection('todos').onSnapshot(snapshot =>{
+      this.setState({
+        items: [...this.state.items, snapshot.docs.map(doc => doc.data().todo)]
+      }); 
+    })
+  };
 
   handleChange = (event) => {
     this.setState({
