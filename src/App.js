@@ -27,9 +27,16 @@ class App extends Component {
 
   componentDidMount() {
     db.collection('todos').onSnapshot(snapshot =>{
+  
+      let newItems = [...snapshot.docs.map(doc => doc.data().todo)];
+
       this.setState({
-        items: [...this.state.items, snapshot.docs.map(doc => doc.data().todo)]
-      }); 
+        items: newItems,
+        item: '',
+        id: uuidv4(),
+        editItem: false,
+      });
+      console.log(newItems);
     })
   };
 
@@ -57,6 +64,17 @@ class App extends Component {
 
     const updatedItems = [...this.state.items, newItem];
 
+    // Adding the new todo list to the document
+    db.collection("todos").doc(newItem.id).set(
+      {todo: newItem})
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+  
+
     this.setState({
       items: updatedItems,
       item: '',
@@ -73,6 +91,8 @@ class App extends Component {
   }
 
   handleDelete = (id) => {
+
+    db.collection('todos').doc(id).delete();
     const filteredItems = this.state.items.filter(item => item.id !== id);
     const striked = [...this.state.striked];
     if(striked.includes(id)) {
@@ -129,6 +149,7 @@ class App extends Component {
   }
 
   render() {
+    
     return (
       <div className="container">
         <div className="row">
