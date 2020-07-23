@@ -5,7 +5,6 @@ import { Button, Card, CardBody } from 'reactstrap';
 export default class TodoList extends Component {
     render() {
         const { items, clearList, handleDelete, handleEdit, handleDone, striked } = this.props;
-        console.log(items);
         return (
             <Card className="my-4">
                 

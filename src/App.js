@@ -29,14 +29,20 @@ class App extends Component {
     db.collection('todos').onSnapshot(snapshot =>{
   
       let newItems = [...snapshot.docs.map(doc => doc.data().todo)];
-
+      let striked = [];
+      newItems.forEach(item => {
+        if(item.striked){
+          striked.push(item.id);
+        }
+      });
       this.setState({
         items: newItems,
         item: '',
         id: uuidv4(),
         editItem: false,
+        striked: striked
       });
-      console.log(newItems);
+  
     })
   };
 
@@ -59,14 +65,18 @@ class App extends Component {
 
     const newItem = {
       id: this.state.id,
-      title: this.state.item
+      title: this.state.item,
     };
 
     const updatedItems = [...this.state.items, newItem];
 
     // Adding the new todo list to the document
     db.collection("todos").doc(newItem.id).set(
-      {todo: newItem})
+      {todo: {
+        id: this.state.id,
+        title: this.state.item,
+        striked: false
+      }})
     .then(function() {
         console.log("Document successfully written!");
     })
@@ -83,7 +93,10 @@ class App extends Component {
     });
   }
 
-  clearList = () =>{
+   clearList = () =>{
+    this.state.items.forEach(async item => {
+      await db.collection('todos').doc(item.id).delete();
+    })
     this.setState({
       items: [],
       striked: []
@@ -117,7 +130,6 @@ class App extends Component {
   handleEdit = id => {
     const filteredItems = this.state.items.filter(item => item.id !== id);
     const selectedItem = this.state.items.find(item => item.id === id);
-
     this.setState({
       items: filteredItems,
       item: selectedItem.title,
@@ -128,9 +140,32 @@ class App extends Component {
 
   handleDone = (id) => {
     const striked = [...this.state.striked];
+    let newStriked;
+    let docRef = db.collection("todos").doc(id);
+
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            if(doc.data().todo.striked){
+              let test = db.collection('todos').doc(id);
+              test.update({
+                "todo.striked" : false
+              })
+            }else{
+              let test = db.collection('todos').doc(id);
+              test.update({
+                "todo.striked" : true
+              })
+            }
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
     
     if(striked.includes(id)) {
-      let newStriked = [...striked]
+      newStriked = [...striked]
       const index = newStriked.indexOf(id);
       if (index > -1) {
         newStriked.splice(index, 1);
@@ -138,14 +173,14 @@ class App extends Component {
       this.setState({
         striked: newStriked
       });  
+
     }
     else if (!striked.includes(id)){
-      let newStriked = [...striked, id]
+      newStriked = [...striked, id]
       this.setState({
         striked: newStriked
       }); 
-    }
-     
+    }    
   }
 
   render() {

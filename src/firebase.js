@@ -15,8 +15,7 @@ firebase.initializeApp({
     appId: process.env.REACT_APP_APP_ID,
     measurementId: process.env.REACT_APP_MEARSUREMENT_ID
   });
-//   console.log(typeof(process.env.projectId))
-  console.log(process.env);
-  const db = firebase.firestore();
 
-  export default db;
+const db = firebase.firestore();
+
+export default db;
