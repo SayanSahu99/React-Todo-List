@@ -57,6 +57,9 @@ npm start # or yarn
 ## Future Improvements
 Currently this project doesn't have firebase-auth, so all the users can see and edit the todos of each other :sweat_smile:.
 
+## License
+Released under the [MIT](https://opensource.org/licenses/mit-license.php) license.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
