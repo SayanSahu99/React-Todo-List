@@ -1,5 +1,20 @@
 # React To-Do List
 
+<div align=center>
+<a href="https://github.com/reactjs">
+    <img src="https://img.shields.io/badge/React.js-blue.svg?logo=react" alt="shield.png">
+</a>
+
+<a href="https://github.com/firebase">
+    <img src="https://img.shields.io/badge/Firebase-blue.svg?logo=firebase" alt="shield.png">
+</a>
+
+<a href="https://github.com/SayanSahu99/EarBeats/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="shield.png">
+</a>
+</div>
+
+
 This is a simple and small To-Do list app built using React. Todo Items are generated and rendered to the DOM once it is submitted through the form. They can be updated to show whether they are completed or not. In addition, the user can delete an item from the todo list or they can delete the entire todo list, removing it from the cloud firestore and from the project's State.
 
 All the tasks are saved in the cloud firestore. This app shows all the CRUD (Create, read, update and delete) operations. 
